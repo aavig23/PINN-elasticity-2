@@ -1,0 +1,47 @@
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE / editor
+.vscode/
+.idea/
+
+# Environment / secrets
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Generated experiment outputs
+# Local scratch only (smoke runs go to outputs/smoke/). Real runs live in the
+# committed runs/ directory and must never be placed here (spec section 7.3).
+results/
+outputs/
+
+# Partially written checkpoints (saved to *.tmp, then renamed atomically)
+runs/**/checkpoints/*.tmp
+
+# Logs
+*.log
+
+# Claude Code personal settings
+.claude/settings.local.json
