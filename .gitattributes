@@ -1,0 +1,15 @@
+# Consistent line endings between local Windows and Colab Linux.
+* text=auto
+*.py     text eol=lf
+*.yaml   text eol=lf
+*.yml    text eol=lf
+*.md     text eol=lf
+*.toml   text eol=lf
+*.csv    text eol=lf
+*.json   text eol=lf
+*.ipynb  text eol=lf
+
+# Binary run artifacts: never diff or convert.
+*.npz binary
+*.pt  binary
+*.png binary
