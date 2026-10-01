@@ -1,0 +1,37 @@
+# Fast CPU smoke test for Stage 1: checks the pipeline runs end to end.
+# Not a meaningful training run.
+extends: ../base/stage1_static.yaml
+
+experiment:
+  id: SMOKE
+  name: stage1_smoke
+
+model:
+  hidden_layers: 2
+  width: 16
+
+sampling:
+  n_interior: 256
+  n_top: 64
+  n_bottom: 64
+  n_right: 32
+  n_left: 32
+  resample_every: 20
+
+optimizer:
+  adam_iterations: 40
+  lbfgs_iterations: 10
+
+training:
+  log_every: 5
+  lbfgs_log_every: 2
+  checkpoint_every: 20
+
+output:
+  nx: 11
+  nz: 6
+
+diagnostics:
+  edge_points: 21
+  edge_times: 5
+  precision_check_points: 128

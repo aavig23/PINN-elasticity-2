@@ -1,0 +1,23 @@
+# Stage 2: elastodynamics over t_hat in [0, T_hat] (spec §1.5).
+# Numerical defaults are the approved baseline choices (docs/decisions.md B1-B6).
+extends: stage1_static.yaml
+
+experiment:
+  name: stage2_dynamic
+  stage: 2
+
+model:
+  hidden_layers: 6
+  width: 128
+
+sampling:
+  n_interior: 20000
+  n_top: 4000
+  n_bottom: 4000
+  n_right: 2000
+  n_left: 2000          # used only in soft mode
+  n_initial: 4000       # used only in soft mode
+
+optimizer:
+  adam_iterations: 30000
+  lbfgs_iterations: 5000

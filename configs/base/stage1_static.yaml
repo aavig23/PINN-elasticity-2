@@ -1,0 +1,53 @@
+# Stage 1: static solve at the full load (spec §1.5).
+# Numerical defaults are the approved baseline choices (docs/decisions.md B1-B6).
+extends: physics.yaml
+
+experiment:
+  id: BASE
+  name: stage1_static
+  parent: null
+  stage: 1
+  seed: 0
+
+model:
+  hidden_layers: 4
+  width: 64
+  activation: tanh
+
+constraints:
+  mode: hard            # clamp built into the output; tractions soft
+
+sampling:
+  n_interior: 5000
+  n_top: 500
+  n_bottom: 500
+  n_right: 250
+  n_left: 250           # used only in soft mode
+  n_initial: 0          # Stage 1 has no initial conditions
+  resample_every: 1000  # Adam iterations; L-BFGS uses a fixed set
+
+loss:
+  weighting: fixed
+  weights: {pde: 1.0, free: 1.0, load: 1.0, clamp: 1.0, ic: 1.0}
+  corner_exclusion_radius: 0.05   # diagnostic only, never trained on
+
+optimizer:
+  adam_lr: 1.0e-3
+  adam_lr_final: 1.0e-4
+  adam_iterations: 10000
+  lbfgs_iterations: 2000
+  lbfgs_history: 50
+  lbfgs_line_search: strong_wolfe
+
+training:
+  log_every: 100
+  lbfgs_log_every: 10
+  checkpoint_every: 1000
+
+precision:
+  dtype: float32
+
+diagnostics:
+  edge_points: 201
+  edge_times: 41
+  precision_check_points: 1000
