@@ -53,3 +53,17 @@ Spec version reviewed: SHA-256 `1E1A4D671E0B395423A43BFA4E9B00CBEED883CF2BC5E660
 | Python (local) | 3.13.5 in `.venv` (unchanged) |
 | Installed locally | torch 2.14.1+cpu, numpy 2.5.3, matplotlib 3.11.2, pyyaml 6.0.3, pytest 9.1.1 |
 | Repo state | No commits yet, so `main` does not exist as a branch. M0 files are built on the unborn `main`; at the first authorised commit, `.gitignore` + spec go to `main` first and the scaffolding onto `feat/m0-scaffolding`. |
+
+---
+
+## 2026-10-01 — M1–M4 implementation details (approved with the M1–M4 commit)
+- Config inheritance may chain (`stage2_dynamic` → `stage1_static` → `physics`); cycles are rejected.
+- Checkpoints do not store RNG state: point sets come from generators seeded by (seed, set index), and resume reproducibility is tested.
+- L-BFGS keeps the last Adam point set fixed; logged rows hold losses at the start of their iteration.
+
+## 2026-10-01 — Colab integration (Step 9)
+- Colab runs the **committed** code: every notebook run starts with a fresh clone at a chosen `REF` (branch, tag or commit SHA) and prints the commit.
+- Install with `pip install --no-deps -e .`; **torch is never installed or upgraded** on Colab.
+- Other dependencies are installed only if **completely missing**; a version below the project's lower bound is a **warning, not an upgrade** (upgrading Colab's preinstalled packages can break others).
+- Notebook steps run as `!python …` subprocesses so the editable install works without a runtime restart.
+- New helper scripts: `scripts/check_environment.py` (environment/GPU/import check) and `scripts/smoke_test.py` (minimal end-to-end PINN run). These are additions to the `scripts/` folder planned for `run.py`, `push_results.py`, `summarize_runs.py`.

@@ -38,8 +38,17 @@ python -m pytest
 ```
 
 ## Colab
-Training runs on Google Colab. See [`docs/colab_setup.md`](docs/colab_setup.md)
-for the one-time token setup. Notebook instructions are added in M7.
+Training runs on Google Colab GPUs using the committed code from GitHub.
+Open [`notebooks/colab_runner.ipynb`](notebooks/colab_runner.ipynb) in Colab
+and run all cells: GPU check, fresh clone, install (keeping Colab's own
+torch), environment check, tests, GPU smoke test. Details and the dependency
+policy: [`docs/colab_setup.md`](docs/colab_setup.md).
+
+Local equivalents of the checks:
+```powershell
+python scripts/check_environment.py
+python scripts/smoke_test.py --device cpu
+```
 
 ## Documentation
 - [`docs/workflow.md`](docs/workflow.md): the local → GitHub → Colab → analysis loop
